@@ -3,7 +3,7 @@ from tkinter import *
 def entrada(valor):
     in0['text'] += valor   
 def resultado():
-    x=eval(in0['text'])
+    x=round(eval(in0['text']),2)
     in0['text']=str(x)
 def limpar():
     in0['text'] = ''  
