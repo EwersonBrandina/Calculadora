@@ -4,8 +4,7 @@ def entrada(valor):
     in0['text'] += valor   
 def resultado():
     x=eval(in0['text'])
-    in0['text']=x
-    
+    in0['text']=str(x)
 def limpar():
     in0['text'] = ''  
 #front-end
@@ -54,7 +53,7 @@ bt19 = Button (root, text='⌫', font= 'Arial 25', command=lambda: limpar())
 bt20 = Button (root, text='C', font= 'Arial 25', command=lambda: limpar())
 #interação com o teclado
 root.bind('.', lambda event: entrada('.'))
-root.bind('=', lambda event: resultado())
+root.bind('<Return>', lambda event: resultado())
 root.bind('+', lambda event: entrada('+'))
 root.bind('-', lambda event: entrada('-'))
 root.bind('*', lambda event: entrada('*'))
