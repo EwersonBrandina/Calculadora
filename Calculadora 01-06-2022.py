@@ -2,17 +2,12 @@ from tkinter import *
 #salvar os valores inseridos para calculalos
 def entrada(valor):
     in0['text'] += valor   
-       
-
 def resultado():
     x=eval(in0['text'])
     in0['text']=x
-
-def limpar():
-    in0['text'] = ''
-
-
     
+def limpar():
+    in0['text'] = ''  
 #front-end
 root = Tk()
 root.grid_rowconfigure(0, weight=1)
@@ -57,19 +52,18 @@ bt17 = Button (root, text='x²', font= 'Arial 25', command=lambda: entrada('x²'
 bt18 = Button (root, text='%', font= 'Arial 25', command=lambda: entrada('%'))
 bt19 = Button (root, text='⌫', font= 'Arial 25', command=lambda: limpar())
 bt20 = Button (root, text='C', font= 'Arial 25', command=lambda: limpar())
-
-#root.bind('10', lambda event: entrada())
-#root.bind('=', lambda event: entrada())
-#root.bind('+', lambda event: entrada())
-#root.bind('13', lambda event: entrada())
-#root.bind('14', lambda event: entrada())
-#root.bind('15', lambda event: entrada())
+#interação com o teclado
+root.bind('.', lambda event: entrada('.'))
+root.bind('=', lambda event: resultado())
+root.bind('+', lambda event: entrada('+'))
+root.bind('-', lambda event: entrada('-'))
+root.bind('*', lambda event: entrada('*'))
+root.bind('/', lambda event: entrada('/'))
 #root.bind('16', lambda event: entrada())
-#root.bind('17', lambda event: entrada())
-#root.bind('18', lambda event: entrada())
-#root.bind('19', lambda event: entrada())
-#root.bind('19', lambda event: entrada())
-
+root.bind('^^', lambda event: entrada('**'))
+root.bind('%', lambda event: entrada('/100'))
+#root.bind('', lambda event: limpar())
+root.bind('c', lambda event: limpar())
 #Números
 bt0.grid(row=7, column=0, columnspan=2, sticky=NSEW)
 bt1.grid(row=6, column=0, sticky=NSEW)
