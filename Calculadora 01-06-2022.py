@@ -1,14 +1,18 @@
 from tkinter import * 
 #salvar os valores inseridos para calculalos
 def entrada(valor):
-    in0['text'] += valor   
+    in0['text'] += valor 
 def resultado():
-    x=round(eval(in0['text']),2)
-    in0['text']=str(x)
+    if (in0['text'][-1:]) == '+' or (in0['text'][-1:]) == '-' or (in0['text'][-1:]) == '/' or (in0['text'][-1:]) == '*':
+        in0['text'] = 'Calculo Inválido'
+    else:
+        x=round(eval(in0['text']),2)
+        in0['text']=str(x)
 def limpar():
     in0['text'] = ''  
 #front-end
 root = Tk()
+root.title('Calculadora')
 root.grid_rowconfigure(0, weight=1)
 root.grid_rowconfigure(1, weight=1)
 root.grid_rowconfigure(2, weight=1)
