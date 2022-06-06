@@ -3,13 +3,25 @@ from tkinter import *
 def entrada(valor):
     in0_fr2['text'] += valor 
 def resultado():
-    if (in0_fr2['text'][-1:]) == '+' or (in0_fr2['text'][-1:]) == '-' or (in0_fr2['text'][-1:]) == '/' or (in0_fr2['text'][-1:]) == '*':
+    if (in0_fr2['text'][-1:]) == '+' or (in0_fr2['text'][-1:]) == '.' or (in0_fr2['text'][-1:]) == '-' or (in0_fr2['text'][-1:]) == '/' or (in0_fr2['text'][-1:]) == '*':
         lb0_fr1['text']=in0_fr2['text']
         in0_fr2['text'] = 'Calculo Inválido'
     else:
+        x=in0_fr2['text']
+        in0_fr2['text'].replace('+','|',1).replace('-','|',1).replace('/','|',1).replace('*','|',1)
+        in0_fr2['text'].split('|')
+        
+        
+       #TERMINANDO ESTA PARTE 
+        for i in range(len(in0_fr2['text'])):
+            if not (in0_fr2['text'][i]):
+                in0_fr2['text']='Calculo Inválido'
+                break
         lb0_fr1['text']=in0_fr2['text']
         x=round(eval(in0_fr2['text']),2)
         in0_fr2['text']=str(x)
+    
+
 def limpar():
     in0_fr2['text'] = ''
     lb0_fr1['text']='HISTORICO'  
