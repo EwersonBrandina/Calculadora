@@ -1,34 +1,47 @@
-from tkinter import * 
+from tkinter import *
 #salvar os valores inseridos para calculalos
 def entrada(valor):
     in0_fr2['text'] += valor
 #calcular os valores salvos acima.
 def resultado():
     #Verificador do último dígito, para que não seja um operador, mas sim um número ou ponto.
-    if (in0_fr2['text'][-1:]) == '+' or (in0_fr2['text'][-1:]) == '-' or (in0_fr2['text'][-1:]) == '/' or (in0_fr2['text'][-1:]) == '*':
+    if (in0_fr2['text'][-1:]) == '+' or (in0_fr2['text'][-1:]) == '.' or (in0_fr2['text'][-1:]) == '-' or (in0_fr2['text'][-1:]) == '/' or (in0_fr2['text'][-1:]) == '*':
         lb0_fr1['text']=in0_fr2['text']
         in0_fr2['text'] = 'Calculo Inválido'
     #Verificador de cada número para o cálculo dentro da string, para que não ocorra de ter um número ilógico, ou seja, com dois pontos.
     else:
         a=in0_fr2['text']
         #Separar todos os calculos por barras.
-        y=in0_fr2['text'].replace('+','|',1).replace('-','|',1).replace('/','|',1).replace('*','|',1)
+        y=in0_fr2['text'].replace('+','|',1).replace('-','|',1).replace('/','|',1).replace('*','|',1).replace('**','|',1)
         #Quebrar a string no ponto onde estão as barras
-        z=y.split('|') 
+        z=y.split('|')
+        #1) COM O COUNT
+        fim=1
         for i in range(len(z)):
             #Se tem mais de 1 ponto por número, é inválido.
             if z[i].count('.') > 1:
                 in0_fr2['text']='Calculo Inválido'
-                #MESMO COM O BREAK, ESTÁ FAZENDO O CÁLCULO. CORRIGIR!
+                fim=0
                 break
-            #Se tem apenas um ponto por número, é válido.
-        lb0_fr1['text']=a
-        x=round(eval(in0_fr2['text']),2)
-        in0_fr2['text']=str(x)
+        if fim != 0:
+            lb0_fr1['text']=a
+            x=round(eval(in0_fr2['text']),2)
+            in0_fr2['text']=str(x)
+        #COM O REPLACE E ISNUMERIC
+#        for i in range(len(z)):
+#            #Se tem mais de 1 ponto por número, é inválido.
+#            if z[i].count('.') > 1:
+#                in0_fr2['text']='Calculo Inválido'
+#                fim=0
+#                break
+#        if fim != 0:
+#            lb0_fr1['text']=a
+#            x=round(eval(in0_fr2['text']),2)
+#            in0_fr2['text']=str(x)
 #função para limpar a tela
 def limpar():
     in0_fr2['text'] = ''
-    lb0_fr1['text']='HISTORICO'  
+    lb0_fr1['text']='HISTORICO'
 #front-end
 root = Tk()
 #Frame
@@ -81,8 +94,8 @@ bt13_fr2 = Button (fr2, text='-', font= 'Arial 25', command=lambda: entrada('-')
 bt14_fr2 = Button (fr2, text='x', font= 'Arial 25', command=lambda: entrada('*'))
 bt15_fr2 = Button (fr2, text='/', font= 'Arial 25', command=lambda: entrada('/'))
 bt16_fr2 = Button (fr2, text='√', font= 'Arial 25', command=lambda: entrada('√'))
-bt17_fr2 = Button (fr2, text='x²', font= 'Arial 25', command=lambda: entrada('x²'))
-bt18_fr2 = Button (fr2, text='%', font= 'Arial 25', command=lambda: entrada('%'))
+bt17_fr2 = Button (fr2, text='x²', font= 'Arial 25', command=lambda: entrada('**'))
+bt18_fr2 = Button (fr2, text='%', font= 'Arial 25', command=lambda: entrada('/100'))
 bt19_fr2 = Button (fr2, text='⌫', font= 'Arial 25', command=lambda: limpar())
 bt20_fr2 = Button (fr2, text='C', font= 'Arial 25', command=lambda: limpar())
 #interação com o teclado
