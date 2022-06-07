@@ -1,27 +1,31 @@
 from tkinter import * 
 #salvar os valores inseridos para calculalos
 def entrada(valor):
-    in0_fr2['text'] += valor 
+    in0_fr2['text'] += valor
+#calcular os valores salvos acima.
 def resultado():
-    if (in0_fr2['text'][-1:]) == '+' or (in0_fr2['text'][-1:]) == '.' or (in0_fr2['text'][-1:]) == '-' or (in0_fr2['text'][-1:]) == '/' or (in0_fr2['text'][-1:]) == '*':
+    #Verificador do último dígito, para que não seja um operador, mas sim um número ou ponto.
+    if (in0_fr2['text'][-1:]) == '+' or (in0_fr2['text'][-1:]) == '-' or (in0_fr2['text'][-1:]) == '/' or (in0_fr2['text'][-1:]) == '*':
         lb0_fr1['text']=in0_fr2['text']
         in0_fr2['text'] = 'Calculo Inválido'
+    #Verificador de cada número para o cálculo dentro da string, para que não ocorra de ter um número ilógico, ou seja, com dois pontos.
     else:
-        x=in0_fr2['text']
-        in0_fr2['text'].replace('+','|',1).replace('-','|',1).replace('/','|',1).replace('*','|',1)
-        in0_fr2['text'].split('|')
-        
-        
-       #TERMINANDO ESTA PARTE 
-        for i in range(len(in0_fr2['text'])):
-            if not (in0_fr2['text'][i]):
+        a=in0_fr2['text']
+        #Separar todos os calculos por barras.
+        y=in0_fr2['text'].replace('+','|',1).replace('-','|',1).replace('/','|',1).replace('*','|',1)
+        #Quebrar a string no ponto onde estão as barras
+        z=y.split('|') 
+        for i in range(len(z)):
+            #Se tem mais de 1 ponto por número, é inválido.
+            if z[i].count('.') > 1:
                 in0_fr2['text']='Calculo Inválido'
+                #MESMO COM O BREAK, ESTÁ FAZENDO O CÁLCULO. CORRIGIR!
                 break
-        lb0_fr1['text']=in0_fr2['text']
+            #Se tem apenas um ponto por número, é válido.
+        lb0_fr1['text']=a
         x=round(eval(in0_fr2['text']),2)
         in0_fr2['text']=str(x)
-    
-
+#função para limpar a tela
 def limpar():
     in0_fr2['text'] = ''
     lb0_fr1['text']='HISTORICO'  
